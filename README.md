@@ -1,6 +1,6 @@
 ICS_314_VOR_Project
 ===================
-Colten Yamamoto, 
+Colten Yamamoto, Dominique Vacca Farley, Bartholomew Christiansen
 ICS 314
 
 For Console/Terminal VOR:
