@@ -13,11 +13,13 @@ public class Calculation {
   private int lowerBound;     //angle - 90 degrees.
   private boolean signal;     //Good = true.  Bad = false;
   private boolean direction;  //To = true.  From = false.
+  private String stationID;
   
   //A constructor that initializes variables.  The angle is randomly created to represent
   //where the station is relative to the plane.  (VOR always starts at magnetic north,
   //heading towards the station.)
   public Calculation() {
+    
     angle = (int) (Math.random() * 360 + 1);
     int temp = (int) Math.round(Math.random());
     if(temp == 1) {
@@ -36,6 +38,66 @@ public class Calculation {
       lowerBound = lowerBound + 360;
     }
     
+    //Getting and building station ID from Morse Code.
+    Morse morse = new Morse();
+    stationID = "";
+    String tempCode = morse.getCode();
+    String[] morseCode = tempCode.split("//");
+    for(int i = 0; i < morseCode.length; i++) {
+      if(morseCode[i] == ".- ") {
+         stationID += "A";
+      } else if(morseCode[i].equals("-... ")) {
+         stationID += "B";
+      } else if(morseCode[i].equals("-.-. ")) {
+         stationID += "C";
+      } else if(morseCode[i].equals("-.. ")) {
+         stationID += "D";         
+      } else if(morseCode[i].equals(". ")) {
+         stationID += "E";
+      } else if(morseCode[i].equals("..-. ")) {
+         stationID += "F";
+      } else if(morseCode[i].equals("--. ")) {
+         stationID += "G";
+      } else if(morseCode[i].equals(".... ")) {
+         stationID += "H";
+      } else if(morseCode[i].equals(".. ")) {
+         stationID += "I";
+      } else if(morseCode[i].equals(".--- ")) {
+         stationID += "J";
+      } else if(morseCode[i].equals("-.- ")) {
+         stationID += "K";
+      } else if(morseCode[i].equals(".-.. ")) {
+         stationID += "L";
+      } else if(morseCode[i].equals("-- ")) {
+         stationID += "M"; 
+      } else if(morseCode[i].equals("-. ")) {
+         stationID += "N";
+      } else if(morseCode[i].equals("--- ")) {
+         stationID += "O";
+      } else if(morseCode[i].equals(".--. ")) {
+         stationID += "P";
+      } else if(morseCode[i].equals("--.- ")) {
+         stationID += "Q";
+      } else if(morseCode[i].equals(".-. ")) {
+         stationID += "R"; 
+      } else if(morseCode[i].equals("... ")) {
+         stationID += "S";
+      } else if(morseCode[i].equals("- ")) {
+         stationID += "T";
+      } else if(morseCode[i].equals("..- ")) {
+         stationID += "U";         
+      } else if(morseCode[i].equals("...- ")) {
+         stationID += "V";
+      } else if(morseCode[i].equals(".-- ")) {
+         stationID += "W";
+      } else if(morseCode[i].equals("-..- ")) {
+         stationID += "X";
+      } else if(morseCode[i].equals("-.-- ")) {
+         stationID += "Y";
+      } else if(morseCode[i].equals("--.. ")) {
+         stationID += "Z";
+      }  
+    }
   }
   
   //Checks the signal of an inputed OBS.  If the signal is already bad, the method
@@ -211,6 +273,7 @@ public class Calculation {
       }
       System.out.println();
     }
+    System.out.println("Station: " + stationID);
     System.out.print("Direction: ");
     if(dir == true) {
       System.out.print("TO\t\t");
